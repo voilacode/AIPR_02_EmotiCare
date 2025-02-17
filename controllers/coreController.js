@@ -9,3 +9,14 @@ exports.getIndex = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' }); // Return server error response
   }
 };
+
+exports.getPage = async (req, res) => {
+  try {
+    const firstNode = req.originalUrl.split('/')[1];
+    console.log('Url Node:', firstNode); // Debugging line
+    res.render('page', { page: firstNode, user: req.session.user });
+  } catch (err) {
+    console.error('Error fetching pages:', err); // Log errors
+    res.status(500).json({ message: 'Internal Server Error' }); // Return server error response
+  }
+};

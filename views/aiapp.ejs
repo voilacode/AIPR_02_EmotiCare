@@ -2,25 +2,252 @@
  <%- include('snippets/header') %>
 
 <main class="max-w-screen-xl px-16 mx-auto">
-  <div class="">
-    <h1 class="text-2xl font-semibold my-8">AI Content Generator</h1>
-    <form action="/aiapp" method="POST" class="p-8 bg-white shadow-md rounded">
-        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-        <textarea name="prompt" rows="4" class="resize-none p-2 mb-4 border rounded border border-gray-200 focus: border-gray-200  w-full" placeholder="Enter your prompt..."></textarea>
-        <button type="submit" class=" p-2 mt-2 bg-blue-500 text-white rounded">Generate Result</button>
-    </form>
-  </div>
-  <div>
-    <% if (content && content !== "") { %>
-      <div class="bg-white p-6 my-4 shadow-md rounded-md">
-        <h3 class="pb-3 font-semibold text-lg">Result</h3>
-        <div>
-          <%= content %>
+  <div class="my-10">
+    <div class=" mx-auto p-8 bg-white rounded-xl shadow-lg">
+      <h1 class="text-3xl font-bold  p-6 my-4 rounded-md text-center mb-8 text-gray-800">AI Wellness Check</h1>
+      
+      <form id="wellnessForm">
+        
+        <!-- Mood Question -->
+        <div class="mb-8">
+            <label for="mood" class="block text-xl font-semibold text-gray-700">How are you feeling today?</label>
+            <div class="flex items-center mt-2 space-x-4">
+                <label class="cursor-pointer">
+                    <input type="radio" name="mood" value="Very Happy" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-400 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">😊 <span class="text-sm">Very Happy</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="mood" value="Happy" class="hidden peer" />
+                    <span class="peer-checked:bg-blue-400 peer-checked:text-blue-700 p-3 rounded-full text-2xl">🙂 <span class="text-sm">Happy</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="mood" value="Neutral" class="hidden peer" />
+                    <span class="peer-checked:bg-gray-400 peer-checked:text-gray-700 p-3 rounded-full text-2xl">😐 <span class="text-sm">Neutral</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="mood" value="Sad" class="hidden peer" />
+                    <span class="peer-checked:bg-blue-600 peer-checked:text-blue-100 p-3 rounded-full text-2xl">🙁 <span class="text-sm">Sad</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="mood" value="Very Sad" class="hidden peer" />
+                    <span class="peer-checked:bg-red-600 peer-checked:text-red-100 p-3 rounded-full text-2xl">😢 <span class="text-sm">Very Sad</span></span>
+                </label>
+            </div>
         </div>
-      </div>
-      <div class="p-10"></div> 
-    <% } %>
+    
+        <!-- Stress Level Question -->
+        <div class="mb-8">
+            <label for="stress" class="block text-xl font-semibold text-gray-700">How much stress are you experiencing right now?</label>
+            <div class="flex items-center space-x-4 mt-2">
+                <label class="cursor-pointer">
+                    <input type="radio" name="stress" value="No Stress" class="hidden peer" />
+                    <span class="peer-checked:bg-green-400 peer-checked:text-green-700 p-3 rounded-full text-2xl">😌 <span class="text-sm">No Stress</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="stress" value="Low Stress" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-300 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">😅 <span class="text-sm">Low Stress</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="stress" value="Moderate Stress" class="hidden peer" />
+                    <span class="peer-checked:bg-orange-400 peer-checked:text-orange-700 p-3 rounded-full text-2xl">😕 <span class="text-sm">Moderate Stress</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="stress" value="High Stress" class="hidden peer" />
+                    <span class="peer-checked:bg-red-600 peer-checked:text-red-100 p-3 rounded-full text-2xl">😖 <span class="text-sm">High Stress</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="stress" value="Overwhelmed" class="hidden peer" />
+                    <span class="peer-checked:bg-purple-600 peer-checked:text-purple-100 p-3 rounded-full text-2xl">😩 <span class="text-sm">Overwhelmed</span></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Anxiety Question -->
+        <div class="mb-8">
+            <label for="anxiety" class="block text-xl font-semibold text-gray-700">How anxious are you feeling today?</label>
+            <div class="flex items-center mt-2 space-x-4">
+                <label class="cursor-pointer">
+                    <input type="radio" name="anxiety" value="Not Anxious" class="hidden peer" />
+                    <span class="peer-checked:bg-green-400 peer-checked:text-green-700 p-3 rounded-full text-2xl">😌 <span class="text-sm">Not Anxious</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="anxiety" value="Slightly Anxious" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-300 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">😐 <span class="text-sm">Slightly Anxious</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="anxiety" value="Moderately Anxious" class="hidden peer" />
+                    <span class="peer-checked:bg-orange-400 peer-checked:text-orange-700 p-3 rounded-full text-2xl">😧 <span class="text-sm">Moderately Anxious</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="anxiety" value="Very Anxious" class="hidden peer" />
+                    <span class="peer-checked:bg-red-600 peer-checked:text-red-100 p-3 rounded-full text-2xl">😟 <span class="text-sm">Very Anxious</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="anxiety" value="Extremely Anxious" class="hidden peer" />
+                    <span class="peer-checked:bg-purple-600 peer-checked:text-purple-100 p-3 rounded-full text-2xl">😱 <span class="text-sm">Extremely Anxious</span></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Self-Care Question -->
+        <div class="mb-8">
+            <label for="selfCare" class="block text-xl font-semibold text-gray-700">Have you engaged in self-care today?</label>
+            <div class="flex items-center mt-2 space-x-4">
+                <label class="cursor-pointer">
+                    <input type="radio" name="selfCare" value="Yes, a lot" class="hidden peer" />
+                    <span class="peer-checked:bg-green-400 peer-checked:text-green-700 p-3 rounded-full text-2xl">🧘‍♂️ <span class="text-sm">Yes, a lot</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="selfCare" value="A little" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-300 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">🌿 <span class="text-sm">A little</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="selfCare" value="Not at all" class="hidden peer" />
+                    <span class="peer-checked:bg-gray-400 peer-checked:text-gray-700 p-3 rounded-full text-2xl">❌ <span class="text-sm">Not at all</span></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Support Question -->
+        <div class="mb-8">
+            <label for="support" class="block text-xl font-semibold text-gray-700">Do you feel supported by others today?</label>
+            <div class="flex items-center mt-2 space-x-4">
+                <label class="cursor-pointer">
+                    <input type="radio" name="support" value="Fully Supported" class="hidden peer" />
+                    <span class="peer-checked:bg-green-400 peer-checked:text-green-700 p-3 rounded-full text-2xl">🤗 <span class="text-sm">Fully Supported</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="support" value="Somewhat Supported" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-300 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">👥 <span class="text-sm">Somewhat Supported</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="support" value="Not Supported" class="hidden peer" />
+                    <span class="peer-checked:bg-red-600 peer-checked:text-red-100 p-3 rounded-full text-2xl">😔 <span class="text-sm">Not Supported</span></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Coping Question -->
+        <div class="mb-8">
+            <label for="coping" class="block text-xl font-semibold text-gray-700">How well are you coping with challenges?</label>
+            <div class="flex items-center mt-2 space-x-4">
+                <label class="cursor-pointer">
+                    <input type="radio" name="coping" value="Very Well" class="hidden peer" />
+                    <span class="peer-checked:bg-green-400 peer-checked:text-green-700 p-3 rounded-full text-2xl">💪 <span class="text-sm">Very Well</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="coping" value="Fairly Well" class="hidden peer" />
+                    <span class="peer-checked:bg-yellow-300 peer-checked:text-yellow-700 p-3 rounded-full text-2xl">😌 <span class="text-sm">Fairly Well</span></span>
+                </label>
+                <label class="cursor-pointer">
+                    <input type="radio" name="coping" value="Struggling" class="hidden peer" />
+                    <span class="peer-checked:bg-red-600 peer-checked:text-red-100 p-3 rounded-full text-2xl">😞 <span class="text-sm">Struggling</span></span>
+                </label>
+            </div>
+        </div>
+    
+        <!-- Reset and Submit Buttons -->
+        <div class="flex justify-between mt-6 gap-5">
+            <button type="reset" class="w-1/2 py-3 bg-gray-500 text-white rounded-lg">Reset</button>
+            <button type="button" id="submitBtn" class="w-1/2 py-3 bg-blue-600 text-white text-xl rounded-lg hover:bg-blue-700">Submit</button>
+        </div>
+    
+    </form>
+
+      <div id="plan" class="hidden mt-5 bg-green-100 p-6 rounded-md"></div>
+
+      <script>
+        const results = {
+          mood: {
+            "Very Happy": "It’s a great day! You’re full of energy and positivity. Keep up the good vibes!",
+            "Happy": "You’re in a good place today. Keep doing what makes you happy!",
+            "Neutral": "It’s a balanced day. Take it easy and focus on the tasks that matter.",
+            "Sad": "It’s okay to have bad days. Take time for self-care and talk to someone if you need to.",
+            "Very Sad": "Take things slow today. Prioritize mental health and reach out for support if needed."
+          },
+          stress: {
+            "No Stress": "It’s a relaxed day! Enjoy it and take on new challenges with ease.",
+            "Low Stress": "Keep things light today. A good time to focus on your priorities without feeling overwhelmed.",
+            "Moderate Stress": "It might feel like a bit much today. Break tasks into smaller steps and take breaks.",
+            "High Stress": "It’s okay to feel stressed. Focus on breathing and take a moment to relax.",
+            "Overwhelmed": "Consider taking a step back and prioritizing self-care. You deserve a break!"
+          },
+          anxiety: {
+            "Not Anxious": "You’re in a calm state. Focus on positive tasks and enjoy the day ahead.",
+            "Slightly Anxious": "A little anxiety is normal. Practice mindfulness and take a walk if needed.",
+            "Moderately Anxious": "It might be helpful to pause, breathe, and tackle one task at a time.",
+            "Very Anxious": "Consider taking a break or practicing grounding techniques to stay calm.",
+            "Extremely Anxious": "Reach out to someone for support and focus on deep breathing."
+          },
+          selfCare: {
+            "Yes, a lot": "Great job! Keep up the good work and continue focusing on your well-being.",
+            "A little": "Try to take a moment for yourself during the day. Even a small act of self-care counts.",
+            "Not at all": "Prioritize self-care today! Consider meditation or a hobby that helps you relax."
+          },
+          support: {
+            "Fully Supported": "Amazing! Keep connecting with your loved ones and sharing your journey.",
+            "Somewhat Supported": "You’re on the right track. Don’t hesitate to reach out for more support when needed.",
+            "Not Supported": "You’re not alone. Reach out to friends or family for some connection today."
+          },
+          coping: {
+            "Very Well": "You’re handling challenges with confidence. Continue tackling tasks with your strength.",
+            "Fairly Well": "You’re doing well! Stay calm and keep moving forward at your own pace.",
+            "Struggling": "It’s okay to struggle sometimes. Break down tasks and focus on one step at a time."
+          }
+        };
+      
+        document.getElementById("submitBtn").addEventListener("click", function() {
+          const form = document.forms["wellnessForm"];
+          
+          // Show loading animation
+          const planContainer = document.getElementById("plan");
+          planContainer.innerHTML = `
+            <div class=" p-6 my-4 rounded-md text-center">
+              <p>Reviewing...</p>
+              <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading" class="inline-block mb-2 w-8 h-8 mt-3" />
+            </div>
+          `;
+          planContainer.classList.remove("hidden");
+      
+          setTimeout(() => {
+            planContainer.innerHTML = `
+              <div class=" p-6 my-4 rounded-md text-center">
+                <p>Formulating...</p>
+                <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading" class="inline-block mb-2 w-8 h-8 mt-3" />
+              </div>
+            `;
+          }, 3000);
+      
+          setTimeout(() => {
+            planContainer.innerHTML = `
+              <div class=" p-6 my-4 rounded-md text-center">
+                <p>Here we go...</p>
+                <img src="https://i.imgur.com/llF5iyg.gif" alt="Loading" class="inline-block mb-2 w-8 h-8 mt-3" />
+              </div>
+            `;
+          }, 6000);
+      
+          setTimeout(() => {
+            let planContent = "<h2 class='text-xl font-semibold text-gray-700'>Your Wellness Plan for the Day</h2><ul class='mt-4'>";
+      
+            for (const [question, options] of Object.entries(results)) {
+              const selectedValue = form[question]?.value;
+              if (selectedValue) {
+                planContent += `<li><strong>${question.charAt(0).toUpperCase() + question.slice(1)}:</strong> ${results[question][selectedValue]}</li>`;
+              }
+            }
+      
+            planContent += "</ul>";
+            planContainer.innerHTML = planContent;
+          }, 9000);
+        });
+      </script>
+
+    </div>
+
+   
   </div>
+
 </main>
       
  <!-- Loading Footer modules from snippets -->

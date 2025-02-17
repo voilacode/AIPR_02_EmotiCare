@@ -1,0 +1,31 @@
+ <!-- Loading Header modules from snippets -->
+ <%- include('snippets/header') %>
+
+<main class="max-w-screen-xl px-5 mx-auto">
+    <section class="bg-white p-12">
+        <% if (page == "wellness") { %>
+            <%- include('snippets/wellness') %>
+        <% } %>
+
+        <% if (page == "mindcare") { %>
+            <%- include('snippets/mindcare') %>
+        <% } %>
+
+        <% if (page == "mood") { %>
+            <%- include('snippets/mood') %>
+        <% } %>
+
+        <% if (page == "zen") { %>
+            <%- include('snippets/zen') %>
+        <% } %>
+
+        <% if (page == "vital") { %>
+            <%- include('snippets/vital') %>
+        <% } %>
+  </section>
+</main>
+      
+ <!-- Loading Footer modules from snippets -->
+ <%- include('snippets/footer') %>
+   
+
