@@ -1,8 +1,23 @@
-# Coreapp: Barebone Framework for Building Projects
+# EmotiCare: AI-Driven Mental Wellness Companion
 
 ## 🚀 Introduction
 
-**Coreapp** is a minimalistic code framework designed to serve as a foundation for building other applications. Built with **Node.js, Express, Tailwind CSS, and MySQL**, this framework provides the essential features required for authentication, role-based access control, and AI-driven content generation via the GPT Rapid API.
+**Emoticare** is an innovative web application that generates content based on user emotions. Powered by Node.js, Express, Tailwind CSS, and MySQL, this platform leverages AI through the GPT Rapid API to deliver personalized experiences. Emoticare is designed with user-centric authentication, role-based access control, and a sleek, responsive interface.
+
+In an era where mental health awareness is paramount, EmotiCare emerges as a
+groundbreaking AI-driven mental wellness companion. This innovative platform leverages
+artificial intelligence to provide personalized emotional support, mood tracking, and mental
+health resources tailored to individual needs. Developed using state-of-the-art technologies
+such as React Native, Node.js, TensorFlow.js, and MongoDB, EmotiCare integrates advanced
+natural language processing and machine learning algorithms to offer real-time emotional
+analysis and support.
+
+EmotiCare delivers a comprehensive user experience with a range of powerful features,
+including secure authentication, customizable wellness plans, and interactive mood tracking.
+The platform allows users to engage in AI-powered conversations, set mental health goals, and
+receive personalized recommendations for coping strategies and mindfulness exercises. To
+enhance user engagement and support, EmotiCare includes a smart notification system that
+provides timely reminders, motivational messages, and crisis resources when needed.
 
 ## 🎯 Features
 
@@ -25,7 +40,7 @@
 ### 1️⃣ Clone the Repository
 
 ```bash
-git clone https://github.com/voilacode/coreapp.git
+git clone https://github.com/voilacode/AIPR_02_EmotiCare.git
 cd coreapp
 npm i
 ```
